@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myweather.WeatherController">
+   <top>
+      <VBox prefWidth="291.0" styleClass="header">
+         <children>
+            <!-- Header with search and theme toggle -->
+            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="search-bar">
+               <children>
+                  <TextField fx:id="citySearchField" onAction="#onSearchCity" promptText="Enter city name..." styleClass="search-field" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="searchButton" onAction="#onSearchCity" styleClass="search-button" text="🔍" />
+                  <Button fx:id="themeToggleButton" onAction="#onToggleTheme" styleClass="theme-button" text="☀" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </HBox>
+            <!-- App Title - Centered and Modern -->
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="291.0">
+               <children>
+                  <Label styleClass="app-title" text="MyWeather" />
+               </children>
+            </HBox>
+            
+            <!-- Status Bar with Loading and Error -->
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="291.0" spacing="10.0">
+               <children>
+                  <!-- Loading indicator -->
+                  <ProgressIndicator fx:id="loadingIndicator" prefHeight="30.0" prefWidth="30.0" visible="false" />
+                  
+                  <!-- Error message -->
+                  <Label fx:id="errorLabel" styleClass="error-label" visible="false" wrapText="true" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <center>
+      <ScrollPane fitToWidth="true" styleClass="main-scroll">
+         <content>
+            <VBox spacing="20.0" styleClass="main-content">
+               <children>
+                  <!-- Current Weather Section -->
+                  <VBox fx:id="currentWeatherSection" styleClass="weather-section">
+                     <children>
+                        <Label styleClass="section-title" text="Current Weather" />
+                        <HBox alignment="CENTER" spacing="30.0" styleClass="current-weather-container">
+                           <children>
+                              <!-- Main temperature display -->
+                              <VBox alignment="CENTER" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="currentLocationLabel" styleClass="location-label" text="Loading..." />
+                                    <Label fx:id="currentTimeLabel" styleClass="time-label" text="" />
+                                    <HBox alignment="CENTER" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="currentWeatherIcon" styleClass="weather-icon" text="☀" />
+                                          <Label fx:id="currentTempLabel" styleClass="temperature-main" text="--°" />
+                                       </children>
+                                    </HBox>
+                                    <Label fx:id="currentConditionLabel" styleClass="condition-label" text="Loading..." />
+                                    <Label fx:id="feelsLikeLabel" styleClass="feels-like-label" text="Feels like --°" />
+                                 </children>
+                              </VBox>
+                              
+                              <!-- Weather details grid -->
+                              <GridPane hgap="20.0" styleClass="weather-details-grid" vgap="10.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints />
+                                    <ColumnConstraints />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                 </rowConstraints>
+                                 <children>
+                                    <!-- Humidity -->
+                                    <VBox alignment="CENTER" styleClass="detail-item" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                       <children>
+                                          <Label styleClass="detail-icon" text="💧" />
+                                          <Label styleClass="detail-label" text="Humidity" />
+                                          <Label fx:id="humidityLabel" styleClass="detail-value" text="--%" />
+                                       </children>
+                                    </VBox>
+                                    
+                                    <!-- Cloud Coverage -->
+                                    <VBox alignment="CENTER" styleClass="detail-item" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                       <children>
+                                          <Label styleClass="detail-icon" text="☁" />
+                                          <Label styleClass="detail-label" text="Cloud Cover" />
+                                          <Label fx:id="cloudCoverLabel" styleClass="detail-value" text="--%" />
+                                       </children>
+                                    </VBox>
+                                    
+                                    <!-- Precipitation -->
+                                    <VBox alignment="CENTER" styleClass="detail-item" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label styleClass="detail-icon" text="🌧" />
+                                          <Label styleClass="detail-label" text="Precipitation" />
+                                          <Label fx:id="precipitationLabel" styleClass="detail-value" text="-- mm" />
+                                       </children>
+                                    </VBox>
+                                    
+                                    <!-- Wind -->
+                                    <VBox alignment="CENTER" styleClass="detail-item" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label styleClass="detail-icon" text="💨" />
+                                          <Label styleClass="detail-label" text="Wind" />
+                                          <Label fx:id="windLabel" styleClass="detail-value" text="-- km/h" />
+                                       </children>
+                                    </VBox>
+                                    
+                                    <!-- Air Quality -->
+                                    <VBox alignment="CENTER" styleClass="detail-item" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                       <children>
+                                          <Label styleClass="detail-icon" text="🌬" />
+                                          <Label styleClass="detail-label" text="Air Quality" />
+                                          <Label fx:id="airQualityLabel" styleClass="detail-value" text="--" />
+                                       </children>
+                                    </VBox>
+                                    
+                                    <!-- UV Index -->
+                                    <VBox alignment="CENTER" styleClass="detail-item" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <children>
+                                          <Label styleClass="detail-icon" text="☀" />
+                                          <Label styleClass="detail-label" text="UV Index" />
+                                          <Label fx:id="uvIndexLabel" styleClass="detail-value" text="--" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- 3-Day Forecast Section -->
+                  <VBox fx:id="forecastSection" styleClass="weather-section">
+                     <children>
+                        <Label styleClass="section-title" text="3-Day Forecast" />
+                        <HBox fx:id="forecastContainer" spacing="15.0" styleClass="forecast-container">
+                           <!-- Forecast items will be added dynamically -->
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Historical Weather Section -->
+                  <VBox fx:id="historicalSection" styleClass="weather-section">
+                     <children>
+                        <Label styleClass="section-title" text="Last 7 Days" />
+                        <VBox fx:id="historicalContainer" spacing="10.0" styleClass="historical-container">
+                           <!-- Historical items will be added dynamically -->
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

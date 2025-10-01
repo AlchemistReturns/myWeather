@@ -1,0 +1,16 @@
+com\example\myweather\model\Astro.class
+com\example\myweather\model\Current.class
+com\example\myweather\model\Forecast.class
+com\example\myweather\WeatherController.class
+com\example\myweather\HelloApplication.class
+com\example\myweather\model\AirQuality.class
+com\example\myweather\model\Hour.class
+com\example\myweather\model\Condition.class
+com\example\myweather\model\WeatherData.class
+com\example\myweather\service\WeatherApiService.class
+com\example\myweather\model\Day.class
+module-info.class
+com\example\myweather\model\History.class
+com\example\myweather\model\Location.class
+com\example\myweather\model\ForecastDay.class
+com\example\myweather\HelloController.class
